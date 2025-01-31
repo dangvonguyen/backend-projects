@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "task-tracker"
+version = "0.1.0"
+authors = [
+    { name = "Dang Vo Nguyen" }
+]
+description = "A CLI application to track and manage your tasks."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "tabulate"
+]
+
+[project.scripts]
+task-cli = "core.task_cli:main"
+
+[tool.setuptools]
+packages = ["core"]
