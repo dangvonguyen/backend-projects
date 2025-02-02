@@ -8,10 +8,10 @@ from core.settings import *
 def main():
     task_manager = TaskManager(SAVE_DIR, DATA_FILE, ID_FILE)
 
-    command, args = get_command(task_manager)
+    target, args = get_target(task_manager)
 
     try:
-        command(**args)
+        target(**args)
     except KeyError:
         sys.exit("No task ID found")
 
@@ -85,7 +85,7 @@ def get_supported_commands(task_manager: TaskManager) -> dict[str, dict]:
     }
 
 
-def get_command(task_manager: TaskManager):
+def get_target(task_manager: TaskManager):
     parser = ArgumentParser(
         description="A CLI application to track and manage your tasks"
     )
@@ -98,9 +98,9 @@ def get_command(task_manager: TaskManager):
             new_parser.add_argument(*arg.pop("name_or_flags"), **arg)
 
     args = parser.parse_args().__dict__
-    command = supported_commands[args.pop("command")]["target"]
+    target = supported_commands[args.pop("command")]["target"]
 
-    return command, args
+    return target, args
 
 
 if __name__ == "__main__":
